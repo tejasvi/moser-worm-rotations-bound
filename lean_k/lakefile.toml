@@ -1,0 +1,71 @@
+name = "LeanWormK"
+version = "0.1.0"
+keywords = ["math"]
+defaultTargets = ["WormKC"]
+
+# The same options as the Lean proof tree of the bound 0.2410 (the generated modules are built with plain `lean`).
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+autoImplicit = false
+weak.linter.style.header = false
+maxSynthPendingDepth = 3
+
+# Toolchain leanprover/lean4:v4.35.0-rc3; Mathlib at tag v4.35.0-rc3 (commit c55e6e786f49, see lake-manifest.json).
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.35.0-rc3"
+
+# Files from Ethan Keller's moser-worm-improved-bounds (Apache-2.0, commit 9a3394130fe4f7b1df6ffdeffda16601795d9ce4);
+# see third_party/moser-worm-improved-bounds and PROVENANCE.md. Only the files used by the proof are included.
+[[lean_lib]]
+name = "MoserWorm"
+globs = ["MoserWorm.LowerBound.Fan", "MoserWorm.Common.Area", "MoserWorm.Common.Defs", "MoserWorm.Common.Isometry",
+  "MoserWorm.Common.Interval.Rational", "MoserWorm.Common.Interval.Sound"]
+
+# The core-only interval layer of MoserWorm, used by the checker.
+[[lean_lib]]
+name = "WormInterval"
+roots = ["MoserWorm.Common.Interval.Basic", "MoserWorm.Common.Interval.RationalBasic"]
+precompileModules = true
+
+# The statement of the theorem and the geometry it uses.
+[[lean_lib]]
+name = "Worm13a"
+globs = ["Worm13a.+"]
+
+# The certificate checker (core Lean plus Keller's dyadic interval layer).
+[[lean_lib]]
+name = "WormCore"
+roots = ["WormCore.Check", "WormCore.Bound", "WormCore.Tree", "WormCore.Family"]
+precompileModules = true
+
+# Soundness of the checker (Mathlib).
+[[lean_lib]]
+name = "WormSound"
+globs = ["WormSound.+"]
+
+# The kernel layer: walker, packed-data decoders, box covers and their assembly, the bridge to the leaf test.
+[[lean_lib]]
+name = "WormKC"
+globs = ["WormKC.+"]
+
+# The kernel form of the leaf test and the proof that it equals the checker's leaf test.
+[[lean_lib]]
+name = "WormK"
+globs = ["WormK.Fast", "WormK.Fast2", "WormK.Fast3", "WormK.Fast4", "WormK.Walk3", "WormK.Walk4"]
+
+[[lean_lib]]
+name = "WormKProof"
+globs = ["WormKProof.+"]
+
+# The generated modules (from worm_k2410_sources.tar.zst, or written by tools/gen_kd4.py).
+[[lean_lib]]
+name = "WormKD"
+globs = ["WormKD.+"]
+
+# The merge pass that derives the merged certificate.
+[[lean_exe]]
+name = "wormk_mergeout"
+root = "WormKTools.MergeOut"
