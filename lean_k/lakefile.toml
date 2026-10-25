@@ -3,7 +3,7 @@ version = "0.1.0"
 keywords = ["math"]
 defaultTargets = ["WormKC"]
 
-# The same options as the Lean proof tree of the bound 0.2410 (the generated modules are built with plain `lean`).
+# The same options as the Lean proof tree of the bound 0.2414 (the generated modules are built with plain `lean`).
 [leanOptions]
 pp.unicode.fun = true
 relaxedAutoImplicit = false
@@ -60,7 +60,7 @@ globs = ["WormK.Fast", "WormK.Fast2", "WormK.Fast3", "WormK.Fast4", "WormK.Walk3
 name = "WormKProof"
 globs = ["WormKProof.+"]
 
-# The generated modules (from worm_k2410_sources.tar.zst, or written by tools/gen_kd4.py).
+# The generated modules (from the worm_k2414_sources archives, or written by tools/gen_kd5b.py).
 [[lean_lib]]
 name = "WormKD"
 globs = ["WormKD.+"]

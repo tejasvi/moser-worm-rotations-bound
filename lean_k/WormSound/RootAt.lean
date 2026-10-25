@@ -3,11 +3,11 @@ import WormSound.W1Gen
 import Mathlib.Analysis.Real.Pi.Bounds
 
 /-!
-# The domain `D_τ` lies in the root box (instance `τ = 2410/10000`)
+# The domain `D_τ` lies in the root box (instance `τ = 2414/10000`)
 
 The root box of the certificate (`WormCore.rootW`, mantissas at scale `2⁻¹²⁰`) contains the angle ranges `[0, π/3]`,
-`[0, 2π]`, `[0, π]`, `[0, π]` and the translation ranges `[-X_τ, X_τ] × [-Y_τ, Y_τ]` for `τ = 2410/10000` (certificate cert_w2410a). The margins are about `3 · 10⁻⁸` for the angles (with
-`π < 3.14159265358979323847`), `2.5 · 10⁻⁸` for `X_τ` (with `√3 > 1.7320508075`) and `5 · 10⁻⁸` for `Y_τ`.
+`[0, 2π]`, `[0, π]`, `[0, π]` and the translation ranges `[-X_τ, X_τ] × [-Y_τ, Y_τ]` for `τ = 2414/10000` (certificate cert_w2414a). The margins are about `3 · 10⁻⁸` for the angles (with
+`π < 3.14159265358979323847`), `1 · 10⁻⁸` for `X_τ` (with `√3 > 1.7320508075`) and `7 · 10⁻⁹` for `Y_τ`.
 -/
 
 noncomputable section
@@ -37,11 +37,11 @@ lemma angle_le_one {y : ℝ} (h : y ≤ Real.pi) :
   norm_num [BS] at *
   linarith
 
-lemma transX {y : ℝ} (h : |y| ≤ 8 * (2410 / 10000) / Real.sqrt 3 - 1 / 2) :
-    ((-814991347961244562870240160652460032 : Int) : ℝ) / 2 ^ BS ≤ y ∧
-      y ≤ ((814991347961244562870240160652460032 : Int) : ℝ) / 2 ^ BS := by
+lemma transX {y : ℝ} (h : |y| ≤ 8 * (2414 / 10000) / Real.sqrt 3 - 1 / 2) :
+    ((-817447104086536700278289648937074688 : Int) : ℝ) / 2 ^ BS ≤ y ∧
+      y ≤ ((817447104086536700278289648937074688 : Int) : ℝ) / 2 ^ BS := by
   have hs := sqrt3_gt
-  have hd : 8 * (2410 / 10000) / Real.sqrt 3 ≤ 8 * (2410 / 10000) / (17320508075 / 10000000000 : ℝ) :=
+  have hd : 8 * (2414 / 10000) / Real.sqrt 3 ≤ 8 * (2414 / 10000) / (17320508075 / 10000000000 : ℝ) :=
     div_le_div_of_nonneg_left (by norm_num) (by norm_num) hs.le
   have h1 := le_abs_self y
   have h2 := neg_abs_le y
@@ -51,9 +51,9 @@ lemma transX {y : ℝ} (h : |y| ≤ 8 * (2410 / 10000) / Real.sqrt 3 - 1 / 2) :
   · norm_num [BS] at *
     linarith
 
-lemma transY {y : ℝ} (h : |y| ≤ 2 * (2410 / 10000)) :
-    ((-640687964322937763406366786122153984 : Int) : ℝ) / 2 ^ BS ≤ y ∧
-      y ≤ ((640687964322937763406366786122153984 : Int) : ℝ) / 2 ^ BS := by
+lemma transY {y : ℝ} (h : |y| ≤ 2 * (2414 / 10000)) :
+    ((-641751285492041705081209739479613440 : Int) : ℝ) / 2 ^ BS ≤ y ∧
+      y ≤ ((641751285492041705081209739479613440 : Int) : ℝ) / 2 ^ BS := by
   have h1 := le_abs_self y
   have h2 := neg_abs_le y
   constructor
@@ -65,8 +65,8 @@ lemma transY {y : ℝ} (h : |y| ≤ 2 * (2410 / 10000)) :
 /-- `D_τ ⊆ rootW`, with `X_τ`, `Y_τ` and `D_τ` written out. -/
 theorem root_box (x : Fin 12 → ℝ)
     (hx : (0 ≤ x 0 ∧ x 0 ≤ Real.pi / 3) ∧ (0 ≤ x 3 ∧ x 3 ≤ 2 * Real.pi) ∧ (0 ≤ x 6 ∧ x 6 ≤ Real.pi) ∧
-      (0 ≤ x 9 ∧ x 9 ≤ Real.pi) ∧ ∀ b < 4, |coord x (3 * b + 1)| ≤ 8 * (2410 / 10000) / Real.sqrt 3 - 1 / 2 ∧
-        |coord x (3 * b + 2)| ≤ 2 * (2410 / 10000)) :
+      (0 ≤ x 9 ∧ x 9 ≤ Real.pi) ∧ ∀ b < 4, |coord x (3 * b + 1)| ≤ 8 * (2414 / 10000) / Real.sqrt 3 - 1 / 2 ∧
+        |coord x (3 * b + 2)| ≤ 2 * (2414 / 10000)) :
     InBox rootW.lo rootW.hi x := by
   obtain ⟨⟨h0a, h0b⟩, ⟨h3a, h3b⟩, ⟨h6a, h6b⟩, ⟨h9a, h9b⟩, ht⟩ := hx
   have t0 := ht 0 (by norm_num)
@@ -96,8 +96,8 @@ end WormCore.Sound.W1ProofAt
 
 namespace WormCore.Sound
 
-/-- `D_τ ⊆ rootW` for `τ = 2410/10000`. -/
-theorem root_box_at : ∀ x : Fin 12 → ℝ, InDtauOf (2410 / 10000) x → InBox rootW.lo rootW.hi x :=
+/-- `D_τ ⊆ rootW` for `τ = 2414/10000`. -/
+theorem root_box_at : ∀ x : Fin 12 → ℝ, InDtauOf (2414 / 10000) x → InBox rootW.lo rootW.hi x :=
   fun x hx => W1ProofAt.root_box x hx
 
 end WormCore.Sound

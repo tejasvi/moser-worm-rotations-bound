@@ -50,14 +50,14 @@ written for the paper after the runs.
 
 `lean/` holds the 11,566 files of the Lean development that was built and checked, unchanged; the data of the formal proof (`lean/data/`) comes from the archives of the supplement record. Third-party files: see `lean/PROVENANCE.md`.
 
-## Lean files of the proof of 0.241 (`lean_k/`)
+## Lean files of the proof by the kernel alone (`lean_k/`)
 
-`lean_k/` holds the 86 hand-written files of the proof that the Lean kernel checks alone; the generated modules are in the supplement record. The table lists every file that differs from the version that was built and checked. Comments, docstrings and documentation were edited to remove internal names, the lakefile lists only the shipped libraries, and `README.md` and the third-party files are new in this directory. Of the generated modules, only `WormKD/Final.lean` differs from the built version, in two docstrings; compiled against the built tree, it gives the same theorems with the same axioms. Third-party files: see `lean_k/PROVENANCE.md`.
+`lean_k/` holds the 86 hand-written files of the proof that the Lean kernel checks alone; the generated modules are in the supplement record. The table lists every file that differs from the version that was built and checked. Comments, docstrings and documentation were edited to remove internal names, the lakefile lists only the shipped libraries, and `README.md` and the third-party files are new in this directory. Of the generated modules, only `WormKD/Final.lean` differs from the built version, in two docstrings. Third-party files: see `lean_k/PROVENANCE.md`.
 
 | file | SHA-256 of the version that was built | SHA-256 of this file | changes |
 |---|---|---|---|
 | lean_k/PROVENANCE.md | - | 22eccb627eac70fb9f8bcb66332f7731c9b81c8a6d9caef69c967ea55d9adee6 | added (third-party files and their provenance) |
-| lean_k/README.md | - | 1268ef3428a2de080dbac9eab4657b19c8546d35f87551a2b1eef01b079d4d91 | new |
+| lean_k/README.md | - | f78331f6591075c2f566c891d898fe9f0b6d1730783ca780cd773eb71d41f129 | new |
 | lean_k/WormCore/Check.lean | e678104d4650cd0ce2496cf4193d97339301d3bfc9fd714405a726e84575e857 | 7fb4d735d489cf04aa9ef66ce6c852e4d70f43d846a603ce760a20763b332a40 | comments and docstrings |
 | lean_k/WormK/Fast.lean | 1402afc4e0d0738b67fc77b4988da6127f0b4125e0789bf4245dd909add3163b | 7739805d88f34ae7b75533ec5cd33e1e7e21a918ee205f65729718817b4f7dd7 | comments and docstrings |
 | lean_k/WormK/Fast2.lean | aa5daefabe76662d2748ff184aa4aa4840d8d6bac9fb874a33bfdd28f897670c | 18182cae8175850aedb999830e7bfa61189eb44353890121d3b4a366e8926f3a | comments and docstrings |
@@ -73,12 +73,12 @@ written for the paper after the runs.
 | lean_k/WormKProof/R4Prims.lean | 46d371a9d783a034337a57d4ddbaf9b8a8b61d4b3967a38ad3938433af45d5ae | a96352b71fdaed40d33921c02a0d8dea7bd6b915bb4584135e9422a82772b57c | comments and docstrings |
 | lean_k/WormKProof/Walk.lean | 2f71726bf23df948ac8dc0f5d091f24a9151e4663ee0a39454277532560bdda7 | 143971011b68ebc9c78a5f0731df6efc0577784f6644728d3e0dc301644e9c2c | comments and docstrings |
 | lean_k/WormKTools/MergeOut.lean | 300efc9ad6a4530c8b4d0f4a243c71ce5e1bc8b58a6f3535323a6eb1f0c2ce77 | 6f827c605808de7b9b2f91e2af9aa7a56cc45cb56d41244d9f28bbba17012403 | comments and docstrings |
-| lean_k/WormSound/FinalAt.lean | 5bec7413844e03e1842a0ad4b0e3146d2b435fc8b40de16822c36faa990971b6 | 24e8e7ab80f0f0b4a453b04e45c8ab12ee55994b9f688b7e7a231d742c489f15 | comments and docstrings |
-| lean_k/lakefile.toml | c526545fd7cffa73c05742043e5a89060f451b7348a31b3d29b8b782a336fb66 | 97efeede10a9809ebf7b3676b642232555f8c22241922606c85c7c24953a9d78 | rewritten to list the libraries of the shipped modules, with the same options |
+| lean_k/WormSound/FinalAt.lean | 97a547267362a2f263bb94a59f7c23b6683d354d116bb6e9120e0ae0d45febe5 | d54b631bfaba18497f70cdc9f61347ee5558be42ce5398bfc774a7df8242bbc3 | comments and docstrings |
+| lean_k/lakefile.toml | 94226a6111a55db5a8010a010b27de2d3afc2c7e0f5cdf93caa1ba513a9f8d2c | a074207f21f38ed4036262d8e0853ea350cd0f79a3a1225849a5597993b8c204 | rewritten to list the libraries of the shipped modules, with the same options |
 | lean_k/third_party/moser-worm-improved-bounds/CITATION.cff | - | 78d96646a050bdd70d732f920b534fe2ecf4de09148a85ad07456508b2c387a3 | added (third-party files and their provenance) |
 | lean_k/third_party/moser-worm-improved-bounds/LICENSE | - | e74b5d16da388425ae5bd2bb9fa384749198717dd77b7c24bb394b49c959016c | added (third-party files and their provenance) |
 | lean_k/third_party/moser-worm-improved-bounds/UPSTREAM_SHA256SUMS | - | a39e0376db051237e54e52c04539ce33a8317864755fa9be095485c5d86f968b | added (third-party files and their provenance) |
-| lean_k/tools/StatementCheckK2410.lean | 39ffa7c8b8191509c1590003df671ee4b438e241a3d758b0b8c7e9a1ef85da60 | ca28d780ee4fcfb8013161b7769ca46806bcaecf23fd6f06b472938e143a33e3 | comments and docstrings |
+| lean_k/tools/StatementCheckK2414.lean | 76cebddc5d802bb4900b695fe7b51ef3944dd729433c592fedf38951addf1119 | 3bf5878eb137c3d321b341d1704f0d673eab94e8200595f4f14e3e3d663bedd6 | comments and docstrings |
 | lean_k/tools/build_dag.py | 5bcf8a7c3ae9da72f5153d03dddd89a093feb4a3d29936805655caf38bb54f83 | 8322b072d5086d611503e6f13f5e1053f3bce60dbb891e4a61c95db6f6999fe6 | comments and docstrings |
-| lean_k/tools/gen_kd4.py | e75283a131fb65bc95154fa820e1649ed6a48e1d3c8c50529f7520294501cc26 | d9cce45c93733e1c6f22e8732822d5a7d7e363beeae14fec70f5ee2eeceffd9b | comments and docstrings, including the two docstrings that it writes into `WormKD/Final.lean` |
-| WormKD/Final.lean | cafb4f626e9b22f5eb4f7cc43d835070769d61c5b964aed300f605027433256b | e6d7e8a394b4bbb52143a9987d08fdb96595898363037052c96ec80cad702473 | regenerated; two docstrings differ |
+| lean_k/tools/gen_kd5b.py | f84b10780177f10f632243ae42ebc4e988481929c59d75772662b384a3b6f78e | 886d20cc15b9ce6bb1ee8385e752ac2705215ab0142b5d7cab6ba41b3e280425 | comments and docstrings, including the two docstrings that it writes into `WormKD/Final.lean` |
+| WormKD/Final.lean | 0840c2adfed3fef2d24e16cec1c3da47fd2229d0eadb5c37c96287f36738e55a | 9b56cb590818c3c6cb1c72cf12461661e1e8a2321c37125d4ed401a508b7a533 | regenerated; two docstrings differ |

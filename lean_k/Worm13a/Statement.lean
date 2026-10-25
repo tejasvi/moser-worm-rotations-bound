@@ -11,8 +11,8 @@ A unit arc is a curve `γ : ℝ → ℂ` that is continuous on `[0, 1]` and has 
 congruent copies may also be reflected (`M+-`). Here a set `K` covers `γ` when it contains a rotated and translated copy
 of the trace `γ([0, 1])`, i.e. its image under a proper rigid motion `z ↦ e^{iθ} z + t` (`M+`).
 
-Theorem: every convex set that covers every unit arc in this sense has area at least `0.2410`
-(`WormLowerAt (2410 / 10000)`, `Worm13a/StatementAt.lean`). `WormLowerM` below is the bound `0.24`.
+Theorem: every convex set that covers every unit arc in this sense has area at least `0.2414`
+(`WormLowerAt (2414 / 10000)`, `Worm13a/StatementAt.lean`). `WormLowerM` below is the bound `0.24`.
 -/
 
 open Set MeasureTheory
@@ -55,12 +55,12 @@ def optimalAreaM : ℝ≥0∞ :=
 
 /-- The bound `0.24` as a proposition: every convex set that contains a rotated and translated copy of every
 unit arc has area at least `0.24`. (This package proves the stronger
-`Worm.worm_lower_2410 : WormLowerAt (2410 / 10000)`.) -/
+`Worm.worm_lower_2414 : WormLowerAt (2414 / 10000)`.) -/
 def WormLowerM : Prop :=
   ∀ K : Set Plane, IsConvexCoverM K → ENNReal.ofReal (24 / 100) ≤ volume K
 
 /-- The bound `0.24` for the least area, as a proposition. (This package proves the stronger
-`Worm.optimalAreaM_lower_2410 : OptimalAreaLowerAt (2410 / 10000)`.) -/
+`Worm.optimalAreaM_lower_2414 : OptimalAreaLowerAt (2414 / 10000)`.) -/
 def OptimalAreaLowerM : Prop :=
   ENNReal.ofReal (24 / 100) ≤ optimalAreaM
 

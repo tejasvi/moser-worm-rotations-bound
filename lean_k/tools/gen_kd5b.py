@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""K data generator (production layout, plain Lean files).
+"""gen_kd5.py: gen_kd4.py (e75283a1) with the final template for tau = 2414/10000 added (K-2414); nothing else changed.
 
-  gen_kd4.py skel  SNAPDIR OUTDIR
+K data generator (production layout, plain Lean files).
+
+  gen_kd5b.py skel  SNAPDIR OUTDIR
       -> OUTDIR/WormKD/Skel.lean   (packed skeletons of all parts in a Braun tree; skelOf)
-  gen_kd4.py part  SNAPDIR MERGEDDIR OUTDIR P MAXLEAVES PIECES_PER_HOLE LEAFT HT
+  gen_kd5b.py part  SNAPDIR MERGEDDIR OUTDIR P MAXLEAVES PIECES_PER_HOLE LEAFT HT
       -> OUTDIR/WormKD/H/P<p>_<j>.lean (hole modules) and OUTDIR/WormKD/Part/P<p>.lean (part aggregator)
   LEAFT: Lean term of the leaf test; HT: proof that it equals leafOKR famW maxsmallW tauHiW (e.g. "rfl").
 All data is packed into Nat literals (see WormKC/Pack.lean); the decoders there are untrusted."""
@@ -135,7 +137,7 @@ def gen_skel(SNAP, OUT):
          "namespace WormKD", "open WormCore", "",
          "noncomputable def skelTab : K.BTree Nat := nat_btree% \"" + " ".join(vals) + "\"", "",
          "/-- The skeleton of part `p`. -/",
-         "noncomputable def skelOf (p : Nat) : String := String.ofList (K.decodeSkel 4096 ((skelTab.get p).getD 0))", "",
+         "noncomputable def skelOf (p : Nat) : String := String.ofList (K.decodeSkel 8192 ((skelTab.get p).getD 0))", "",
          "end WormKD", ""]
     open(os.path.join(OUT, "WormKD/Skel.lean"), "w").write("\n".join(L))
 
@@ -264,6 +266,14 @@ FINAL = {
              "",
              "/-- **Theorem, kernel-only**, for the least area. -/",
              "theorem optimalAreaM_lower_K : OptimalAreaLowerAt (2410 / 10000) := WormCore.Sound.optimalAreaLowerAt_of worm_lower_K"],
+    "2414": ["/-- **Theorem, kernel-only.** Every convex set that contains a rotated and translated copy of every",
+             "unit arc has area at least `0.2414`. -/",
+             "theorem worm_lower_K : WormLowerAt (2414 / 10000) :=",
+             "  wormLowerAt_of_parts (2414 / 10000) (by norm_num) WormCore.Sound.tau_2414_le WormCore.Sound.root_box_at",
+             "    skelOf allParts",
+             "",
+             "/-- **Theorem, kernel-only**, for the least area. -/",
+             "theorem optimalAreaM_lower_K : OptimalAreaLowerAt (2414 / 10000) := WormCore.Sound.optimalAreaLowerAt_of worm_lower_K"],
 }
 
 def gen_root(OUT, nparts=16384, bs=64):
@@ -421,7 +431,7 @@ def cut_unit(codes, rtoks, table, box, CAP, MAXL):
 
 SUBMAX = int(os.environ.get("SUBMAX", "0"))
 HOLE_IMPORT = os.environ.get("HOLE_IMPORT", "WormK.Walk3")   # module of the leaf test named in LEAFT
-TAU = os.environ.get("TAU", "")                               # "" = the 0.24 statement; "2410" = WormLowerAt (2410/10000)
+TAU = os.environ.get("TAU", "")                               # "" = the 0.24 statement; "2410", "2414" = WormLowerAt (24xx/10000)
 SALT = os.environ.get("SALT", "0") == "1"
 
 def box_lit(b, t):
