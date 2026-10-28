@@ -1,10 +1,12 @@
 # A lower bound for Moser's worm problem with rotations and translations
 
-Checker, check logs, search programs and two formal proofs in Lean 4 for the paper
-*A lower bound for Moser's worm problem with rotations and translations* by Tejasvi Singh Tomar
-(Zenodo, [doi:10.5281/zenodo.23632856](https://doi.org/10.5281/zenodo.23632856)). The certificate (9.9 GB in nineteen archives), the data of the
-formal proofs (7.3 GB in seven archives for `lean/`, 14.1 GB in ten archive parts for `lean_k/`) and this repository are
-archived in the supplement record [doi:10.5281/zenodo.23632857](https://doi.org/10.5281/zenodo.23632857).
+Checker, check logs, search programs and two formal proofs in Lean 4 for the paper *A lower bound for Moser's worm
+problem with rotations and translations* by Tejasvi Singh Tomar (Zenodo,
+[doi:10.5281/zenodo.23717800](https://doi.org/10.5281/zenodo.23717800)). The certificate (9.9 GB in nineteen archives),
+the data of the formal proofs (7.3 GB in seven archives for `lean/`, 14.1 GB in ten archive parts for `lean_k/`) and
+this repository are archived in the supplement record
+[doi:10.5281/zenodo.23717801](https://doi.org/10.5281/zenodo.23717801). `paper/main.tex` is the LaTeX source of the
+paper. Version 8 revises the text of the paper; the certificate, the programs and the Lean files are those of version 7.
 
 ## Theorem
 
@@ -136,18 +138,18 @@ two-link arc, the parallelogram hulls of C and S); that the root box contains D;
 every split at the double-precision midpoint of the box and every leaf box exactly c ± h; at every leaf, in ball
 arithmetic at 100 bits, the validity of every structure of positive weight on the whole box, its Taylor bound, and
 that the combination of these bounds exceeds 0.2414. Two steps leave ball arithmetic. The checker rounds the lower
-bound Λ for the second-order term of the Taylor bound to double precision, from up to three candidates; Section 4.3
+bound Λ for the second-order term of the Taylor bound to double precision, from up to three candidates; Appendix A.2
 of the paper shows that this changes the accepted bounds by less than 10⁻¹⁴, against a smallest margin of 9.607·10⁻⁸.
 And a fallback for square roots of balls that contain 0 works in double precision; it returns an enclosure for every
 such ball that occurs. The certificate is not trusted: a leaf passes only if these inequalities prove A > 0.2414 on it.
 
 Before release, we audited the certificate and the checker separately from the work that produced them. We rederived the
 lemmas on which the checker rests, reviewed the checker, the presence program and `check_headers.py` against them,
-checked all leaves again with the same results, and decoded the trees of all parts with a separate program. A further
-implementation of the leaf bound, which shares no code with the checker, accepted all 500 leaves on which it
-was run, among them 100 of those with the smallest margins (Section 4.7 of the paper). The formal proof described below
-also verifies the whole certificate, converted into another format, with a checker written in Lean that bounds the hull
-area on the leaves differently.
+checked all leaves again with the same results, and decoded the trees of all parts with a separate program. Copies of
+the certificate and of the logs into which we had inserted errors were rejected. A further implementation of the leaf
+bound, which shares no code with the checker, accepted all 500 leaves on which it was run, among them 100 of those with
+the smallest margins (Section 4.5 of the paper). The formal proof described below also verifies the whole certificate,
+converted into another format, with a checker written in Lean that bounds the hull area on the leaves differently.
 
 `checker/wcheck_selftest.py CERT PART` runs the checker on one part and on modified copies of its leaf records and
 header, which must be rejected (repeated vertex, clockwise fan, fan centre outside, five-point small list, negative
@@ -200,10 +202,12 @@ The proof formalizes the reduction of Section 2 of the paper and Lemmas 3.1-3.4 
 In place of the Python checker it uses a checker written in Lean (`lean/WormCore/`), whose soundness it proves
 (`lean/WormSound/`). The Lean checker tests validity as the Python checker does, except that it certifies the winding of
 a fan differently. On the leaves it uses its own bound: an exact quadratic model of the signed area in the translations
-and in the cosines and sines of the angle offsets, bounded on the box by a Gershgorin-type estimate. Section 5 of the
-paper describes both. The data (`lean/data/`, from the archives of the supplement record) consist of 11,072 chunks and
+and in the cosines and sines of the angle offsets, bounded on the box by a Gershgorin-type estimate. Appendix A.3 of
+the paper describes both. The data (`lean/data/`, from the archives of the supplement record) consist of 11,072 chunks and
 skeletons for the 16,384 parts. One module for each chunk proves, with `native_decide`, that the checker accepts the
-chunk. Eleven leaves that the Lean bound could not close are each split once in the data; all halves pass.
+chunk. Eleven leaves that the Lean bound could not close, where it fell short of 0.2414 by 5.38·10⁻⁶ to 5.26·10⁻⁴, are
+each split once in the data, five at the midpoint of φ₁, four at the midpoint of t₁,₁ and two at the midpoint of t₁,₂;
+all halves pass.
 
 Trusted base: the Lean kernel, the Lean compiler and the compiled checker; the last two because `native_decide`
 evaluates the chunk checks by compiled code. `#print axioms Worm.worm_lower_2414` lists `propext`, `Classical.choice`,
@@ -278,8 +282,9 @@ Kernel-only proofs of the weaker bounds 0.241 and 0.24, with the archives of the
 `search/` holds the programs that produced the certificate, which was made in two runs. A first run at τ = 0.241 made a
 tree for every part, with the search program in two versions, `wtask_5acd5ac0.py` (335 parts) and `wtask_ab6507da.py`
 (16,049 parts). A second run, with `wtask_812be2a4.py`, replayed these trees on the root box for τ = 0.2414 and searched
-each of their leaves again at τ = 0.2414. Every part header cites this version and, in its field `refined_from`, the
-SHA-256 hash of the tree codes of the first run; the certificate of the first run is archived in the supplement record
+each of their leaves again at τ = 0.2414; 29,086,714 of the 264,084,910 leaves of the first run were split further.
+Every part header cites this version and, in its field `refined_from`, the SHA-256 hash of the tree codes of the first
+run; the certificate of the first run is archived in the supplement record
 [doi:10.5281/zenodo.23557869](https://doi.org/10.5281/zenodo.23557869), with the data of a proof of the bound 0.241 by
 compiled code. The file names carry the first eight hex digits of the SHA-256 hash of the version that ran. To run the
 search, copy the files to the plain names (`wtask.py`, `wsearch.py`, `wbnb.py`, `wchord.py`, `wfam.py`, `lbsearch.py`,
